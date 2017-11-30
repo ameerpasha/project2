@@ -1,0 +1,66 @@
+<div class="col-md-6 col-md-offset-3">
+<h2>Register</h2>
+<form name="form" role="form">
+<div class="form-group" ng_class="{ 'has-error':form.firstName.$dirty && form.firstName.$error.required}">
+<label for="firstname">firstname</label>
+<input type="text" name="firstname" id="firstname" class="form-control" ng-model="user.firstname" required/>
+<span ng-show="form.firstname.$dirty && form.firstname.$error.required" class="help-block"> first name is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.lastName.$dirty && form.lastName.$error.required}">
+<label for="lastname">lastname</label>
+<input type="text" name="lastname" id="lastname" class="form-control" ng-model="user.lastname" required/>
+<span ng-show="form.lastname.$dirty && form.lastname.$error.required" class="help-block"> last name is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.user_Name.$dirty && form.user_Name.$error.required}">
+<label for="user_name">username</label>
+<input type="text" name="user_name" id="user_name" class="form-control" ng-model="user.user_name" required/>
+<span ng-show="form.user_name.$dirty && form.user_name.$error.required" class="help-block"> user_name is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.email.$dirty && form.email.$error.required}">
+<label for="email">Email</label>
+<input type="text" name="email" id="email" class="form-control" ng-model="user.email" required/>
+<span ng-show="form.email.$dirty && form.email.$error.required" class="help-block"> email is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.password.$dirty && form.password.$error.required}">
+<label for="password">password</label>
+<input type="password" name="password" id="password" class="form-control" ng-model="user.password" required/>
+<span ng-show="form.password.$dirty && form.password.$error.required" class="help-block"> password is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.cpassword.$dirty && form.cpassword.$error.required}">
+<label for="cpassword">confirmpassword</label>
+<input type="password" name="cpassword" id="cpassword" class="form-control" ng-model="user.cpassword" required/>
+<span ng-show="form.cpassword.$dirty && form.cpassword.$error.required" class="help-block"> cpassword is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.contact.$dirty && form.contact.$error.required}">
+<label for="contact">contact</label>
+<input type="text" name="contact" id="contact" class="form-control" ng-model="user.contact" required/>
+<span ng-show="form.contact.$dirty && form.contact.$error.required" class="help-block"> contact is required</span>
+</div>
+
+<div class="form-group" ng_class="{ 'has-error':form.role.$dirty && form.role.$error.required}">
+<label for="role">role</label>
+<input type="radio" value="student" ng-model="user.role">student
+<input type="radio" value="alumini" ng-model="user.role">alumini
+<input type="radio" value="Employee" ng-model="user.role">employee
+<span ng-show="form.role.$dirty && form.role.$error.required" class="help-block"> role is required</span>
+</div>
+
+<div class="form-actions">
+<button type="submit" class="btn-btn-primary" ng-click="registeruser()">register</button>
+
+</div>
+
+
+
+
+
+
+</form>
+
+</div>
