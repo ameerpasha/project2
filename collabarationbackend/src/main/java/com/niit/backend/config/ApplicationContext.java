@@ -14,8 +14,15 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.backend.dao.BlogDaoImpl;
+import com.niit.backend.dao.ForumDaoImpl;
+import com.niit.backend.dao.IBlogDao;
+import com.niit.backend.dao.IForumDao;
 import com.niit.backend.dao.IUserDao;
 import com.niit.backend.dao.UserDaoImpl;
+import com.niit.backend.model.Blog;
+import com.niit.backend.model.BlogComment;
+import com.niit.backend.model.Forum;
 import com.niit.backend.model.User;
 
 @Configuration
@@ -28,8 +35,8 @@ public class ApplicationContext {
 		BasicDataSource dataSource=new BasicDataSource();
 		dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		dataSource.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-		dataSource.setUsername("testdb");
-		dataSource.setPassword("testdb");
+		dataSource.setUsername("AMEERDB");
+		dataSource.setPassword("ameerabhi");
 		System.out.println("data source");
 		return dataSource;
 	}
@@ -52,7 +59,9 @@ public class ApplicationContext {
 		LocalSessionFactoryBuilder sessionBuilder=new LocalSessionFactoryBuilder(dataSource);
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClasses(User.class);
-	
+	    sessionBuilder.addAnnotatedClass(Blog.class);
+	    sessionBuilder.addAnnotatedClass(BlogComment.class);
+	    sessionBuilder.addAnnotatedClass(Forum.class);
 		System.out.println("session factory");
 		return sessionBuilder.buildSessionFactory();
 		
@@ -60,23 +69,58 @@ public class ApplicationContext {
 	}
 	
 	
-	/*@Autowired
+	@Autowired
 	@Bean(name="user")
 	public User getUser()
 	{
 		return new User();
 	}
-	*/
+	
 	@Autowired
-	@Bean(name="iuserDao")
+	@Bean(name="userDao")
 	public IUserDao getUserDao(SessionFactory sessionFactory)
 	{
 		return new UserDaoImpl(sessionFactory);
 	}
 		
+		@Autowired
+		@Bean(name="blogDao")
+		public IBlogDao getBlogDao(SessionFactory sessionFactory)
+		{
+			return new BlogDaoImpl(sessionFactory);
+		}
+		
+		@Autowired
+		@Bean(name="blog")
+		public Blog getBlog()
+		{
+			return new Blog();
+			
+		}	
+		
+		@Autowired
+		@Bean(name="forum")
+		public Forum getForum()
+		{
+			return new Forum();
+			
+		}	
+		@Autowired
+		@Bean(name="forumDao")
+		public IForumDao getForumDao(SessionFactory sessionFactory)
+		{
+			return new ForumDaoImpl(sessionFactory);
+		}
+		
+		
 	
-	
-	
+		@Autowired
+		@Bean(name="blog_comment")
+		public BlogComment getBlogComment()
+		{
+			return new BlogComment();
+		}
+
 	@Autowired
 	@Bean(name ="transactionmanager")
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {

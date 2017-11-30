@@ -1,4 +1,4 @@
-package com.niit.backend.model;
+   package com.niit.backend.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +28,12 @@ public class User  extends BaseDomain {
 	
 	@Transient
 	private String cpassword;
+	
+	@NotEmpty(message="first name is")
+	private String firstname;
+	
+	@NotEmpty(message="last name is")
+	private String lastname;
 	
 	@NotEmpty(message="please enter email id")
 	private String email;
@@ -101,6 +107,22 @@ public class User  extends BaseDomain {
 
 	public void setIsOnline(char isOnline) {
 		this.isOnline = isOnline;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	
 

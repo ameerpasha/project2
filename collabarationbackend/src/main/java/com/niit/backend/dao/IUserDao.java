@@ -6,9 +6,9 @@ import com.niit.backend.model.User;
 
 public interface IUserDao {
 	
-	public boolean save(User user);
+	public void saveuser(User user);
 	
-	public boolean update(User user);
+	public void update(User user);
 	
 	public boolean delete(User user);
 	
@@ -18,7 +18,7 @@ public interface IUserDao {
 	
 	public List<User> list();
 	
-	public User isValidUser(String email,String password);
+	public User isValidUser(User user);
 	
 	public void setOnline(int userId);
 	
