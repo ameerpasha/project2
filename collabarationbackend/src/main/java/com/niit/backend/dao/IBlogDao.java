@@ -24,7 +24,7 @@ public interface IBlogDao {
 	
 	public boolean addComment(BlogComment blogcomment);
 	
-	public List<BlogComment> listComment(int id);
+	public List<BlogComment> getAllBlogComments(int id);
 	
-	public List<BlogComment> listofAllComment();
+	
 }

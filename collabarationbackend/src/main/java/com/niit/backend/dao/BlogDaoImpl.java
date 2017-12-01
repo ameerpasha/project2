@@ -93,30 +93,25 @@ public class BlogDaoImpl implements IBlogDao {
 			 
 		 }
 	}
+
+
 @Transactional
-	public List<BlogComment> listComment(int id) {
-	System.out.println("in comment dao impl");
-	Criteria ct=sessionFactory.getCurrentSession().createCriteria(BlogComment.class);
-	ct.add(Restrictions.eq("blogid",id));
-	List list=ct.list();
-	return list;
-	}
-@Transactional
-
-	public List<BlogComment> listofAllComment() {
-		String hql="from BlogComment";
-		@SuppressWarnings("rawtypes")
-		Query query =sessionFactory.getCurrentSession().createQuery(hql);
-		return query.list();
-	}
-
-
 public List<Blog> viewallblogs() {
 	Session session=sessionFactory.getCurrentSession();
 	Criteria ct=session.createCriteria(Blog.class);
 	ct.add(Restrictions.eq("status","true"));
 	List<Blog>list=ct.list();
 	return null;
+}
+
+@Transactional
+public List<BlogComment> getAllBlogComments(int id) {
+	Session session=sessionFactory.getCurrentSession();
+	Query query=session.createQuery("from BlogComment where id=?");
+	query.setInteger(0,id);
+	return query.list();
+	
+	
 }
 
 }

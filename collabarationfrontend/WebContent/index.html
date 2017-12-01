@@ -42,7 +42,7 @@ type="text/javascript"></script>
                 <li><a href="#" ng-show="currentUser.firstname">Welcome {{currentUser.firstname}} 
 				{{currentUser.lastname}} </a></li>
 				 <li><a href="#/updateprofile" ng-show="currentUser.firstname">UPDATE PROFILE</a></li>
-				  <li><a href="#/savejob" ng-show="currentUser.firstname">Job</a></li>
+				  <li><a href="#/job" ng-show="currentUser.firstname">Job</a></li>
 				  <li><a href="#/blog" ng-show="currentUser.firstname">Add BlogPost</a></li>
                 <li><a href="#/register" ng-hide="currentUser.firstname">Sign Up</a></li>
                 <li><a href="#/login" ng-hide="currentUser.firstname">Sign In</a></li>
@@ -70,5 +70,7 @@ type="text/javascript"></script>
 <script type="text/javascript" src="c_user/UserService.js"></script>
 <script type="text/javascript" src="c_user/blogController.js"></script>
 <script type="text/javascript" src="c_user/blogService.js"></script>
+<script type="text/javascript" src="c_user/jobController.js"></script>
+<script type="text/javascript" src="c_user/jobservice.js"></script>
 </html>
 

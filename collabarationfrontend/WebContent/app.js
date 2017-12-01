@@ -35,6 +35,12 @@ myapp.config(function($routeProvider){
 		
 	})
 	
+	.when('/job',{
+		templateUrl:'c_user/job.html',
+		controller:'jobController'
+		
+	})
+	
 	.otherwise({
 		templeteUrl:'c_home/home.html'});
 	

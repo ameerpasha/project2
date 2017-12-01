@@ -1,5 +1,7 @@
 package com.niit.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ public class BlogComment extends BaseDomain {
 	@NotEmpty(message="please fill some comment")
 	private String comments;
 	@NotEmpty(message="please fill some date")
-	private String commentDate;
+	private Date commentDate;
 	private int user_id;
 	private int blog_id;
 	private String user_name;
@@ -38,13 +40,14 @@ public class BlogComment extends BaseDomain {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public String getCommentDate() {
+	
+	
+	public Date getCommentDate() {
 		return commentDate;
 	}
-	public void setCommentDate(String commentDate) {
+	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
-	
 	public int getUser_id() {
 		return user_id;
 	}
