@@ -57,7 +57,7 @@ public class BlogController {
 		 blog.setCreation_date(dt.toString());
 		 User user=(User) httpSession.getAttribute("logggedInUser");
 		// blog.setUser_name(user.getUser_name());
-		 blog.setUser_name("student");
+		 blog.setUser_name(user);
 		 blog.setStatus("published");
 		 try{
 			 blogDao.save(blog);
@@ -111,8 +111,9 @@ public class BlogController {
 		}
 		String username=(String)session.getAttribute("username");
 		User user=userDao.getName(username);
-		blogComment.setUser_name(username);//set the value for foreign key 'username' in blogcomment table
-		blogComment.setCommentDate(new Date());//set the value for commentedOn
+		
+		blogComment.setUser_name(user);//set the value for foreign key 'username' in blogcomment table
+		blogComment.setCommentedon(new Date());//set the value for commentedOn
 		try{
 		blogDao.addComment(blogComment);
 		return new ResponseEntity<BlogComment>(blogComment,HttpStatus.OK);
@@ -121,7 +122,7 @@ public class BlogController {
 			return new ResponseEntity<BaseDomain>(error,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-   @RequestMapping(value="/getblogcomments/{blogPostId}")
+   @RequestMapping(value="/getblogcomments/{blogId}")
 	public ResponseEntity<?> getBlogComments(@PathVariable int blogPostId,HttpSession session){
 		if(session.getAttribute("username")==null){
 			BaseDomain error=new BaseDomain();

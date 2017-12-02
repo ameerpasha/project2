@@ -63,7 +63,7 @@ public class ApplicationContext {
 		sessionBuilder.addProperties(getHibernateProperties());
 		sessionBuilder.addAnnotatedClasses(User.class);
 	    sessionBuilder.addAnnotatedClass(Blog.class);
-	    sessionBuilder.addAnnotatedClass(BlogComment.class);
+	    /*sessionBuilder.addAnnotatedClass(BlogComment.class);*/
 	    sessionBuilder.addAnnotatedClass(Forum.class);
 	    sessionBuilder.addAnnotatedClass(Job.class);
 		System.out.println("session factory");

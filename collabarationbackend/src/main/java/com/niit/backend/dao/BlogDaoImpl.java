@@ -80,16 +80,16 @@ public class BlogDaoImpl implements IBlogDao {
 		return list;
 	}
 @Transactional
-	public boolean addComment(BlogComment blogcomment) {
+	public void addComment(BlogComment blogcomment) {
 		try
 		 {
 			 sessionFactory.getCurrentSession().save(blogcomment);
-			 return true;
+			 
 		 }
 		 catch(Exception e) {
 			 e.printStackTrace();
 			 
-			 return false;
+			
 			 
 		 }
 	}
@@ -107,11 +107,15 @@ public List<Blog> viewallblogs() {
 @Transactional
 public List<BlogComment> getAllBlogComments(int id) {
 	Session session=sessionFactory.getCurrentSession();
-	Query query=session.createQuery("from BlogComment where id=?");
+	Query query=session.createQuery("from BlogComment where  blog.blog_id=?");
 	query.setInteger(0,id);
 	return query.list();
 	
 	
 }
+
+
+
+
 
 }

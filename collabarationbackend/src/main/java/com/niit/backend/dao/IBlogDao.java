@@ -22,9 +22,12 @@ public interface IBlogDao {
 	
 	public List<Blog> viewblogs();
 	
-	public boolean addComment(BlogComment blogcomment);
 	
-	public List<BlogComment> getAllBlogComments(int id);
+	
+	 void addComment(BlogComment blogComment);
+	
+	public List<BlogComment> getAllBlogComments(int blogPostId);
+
 	
 	
 }
