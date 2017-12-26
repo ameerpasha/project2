@@ -50,9 +50,9 @@
 <input type="radio" value="Employee" ng-model="user.role">employee
 <span ng-show="form.role.$dirty && form.role.$error.required" class="help-block"> role is required</span>
 </div>
-
+<input type="file" file-model="user.myFile"/><br>
 <div class="form-actions">
-<button type="submit" class="btn-btn-primary" ng-click="registeruser()">register</button>
+<button type="submit" class="btn-btn-primary" ng-click="registerUser()">register</button>
 
 </div>
 

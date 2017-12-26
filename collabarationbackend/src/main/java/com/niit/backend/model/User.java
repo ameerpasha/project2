@@ -8,6 +8,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="USERS")
@@ -124,6 +125,28 @@ public class User  extends BaseDomain {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+	@Transient
+	private String imageData;
+	@Transient
+	private MultipartFile img;
+
+	public String getImageData() {
+		return imageData;
+	}
+
+	public void setImageData(String imageData) {
+		this.imageData = imageData;
+	}
+
+	public MultipartFile getImg() {
+		return img;
+	}
+
+	public void setImg(MultipartFile img) {
+		this.img = img;
+	}
+	 
+	
 	
 
 }

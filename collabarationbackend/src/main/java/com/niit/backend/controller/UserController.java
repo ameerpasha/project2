@@ -1,5 +1,9 @@
 package com.niit.backend.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.niit.backend.dao.IUserDao;
 import com.niit.backend.dao.UserDaoImpl;
@@ -29,7 +35,7 @@ public class UserController {
 	IUserDao userDao;
 	
 		
-	@RequestMapping(value="users",method=RequestMethod.GET)
+	@RequestMapping(value="/users",method=RequestMethod.GET)
 	public ResponseEntity<List<User>> listAllUsers(){
 		logger.debug("calling method listallusers");
 		List<User> user=userDao.list();
@@ -87,12 +93,27 @@ public class UserController {
 		return new ResponseEntity<User> (user,HttpStatus.OK);		
 	}*/
 	
-	@RequestMapping(value="/registeruser",method=RequestMethod.POST)
+	/*@RequestMapping(value="/registeruser",method=RequestMethod.POST)
 	public ResponseEntity<?> registeruser(@RequestBody User user){
 		try
 		{
 			System.out.println("i am here");
 			user.setIsOnline('f');
+			MultipartFile image=user.getImg();
+			Path path;
+			path=Paths.get("C:\\Users\\MD.AMEERPASHA\\git2\\collabarationfrontend\\WebContent\\img\\"+user.getUser_name()+".jpg");
+			System.out.println("Path=" +path);
+			System.out.println("File name="+user.getImg().getOriginalFilename());
+			if(image!=null&& !image.isEmpty()) {
+				try {
+					image.transferTo(new File(path.toString()));
+					System.out.println("Image saved in:"+path.toString());
+				}catch(Exception e) {
+					e.printStackTrace();
+					System.out.println("Image not saved")  ;
+				}
+			}
+			
 			userDao.saveuser(user);
 			return new ResponseEntity<User>(user,HttpStatus.OK);
 		}
@@ -101,7 +122,8 @@ public class UserController {
 			BaseDomain error=new BaseDomain();
 			return new ResponseEntity<BaseDomain>(error,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	}
+	}*/
+	
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ResponseEntity<?> isValidUser(@RequestBody User user,HttpSession session){
@@ -129,7 +151,7 @@ BaseDomain error=new BaseDomain();
 		}
 		String username=(String)session.getAttribute("username");
 		Integer uid=(Integer)session.getAttribute("userid");
-		User user=userDao.get(uid);
+		User user=userDao.get(uid);   
 		user.setIsOnline('n');
 		userDao.update(user);
 		session.removeAttribute("username");
@@ -158,6 +180,38 @@ BaseDomain error=new BaseDomain();
 		
 
 	}
+	 @RequestMapping(value="/fileUpload",method=RequestMethod.POST)
+	    public void registerUser(@RequestParam("myFile") MultipartFile file,@RequestParam("user_name") String username,@RequestParam("firstname") String firstname,@RequestParam("lastname") String lastname,@RequestParam("email") String email,@RequestParam("password") String password,@RequestParam("contact") String contact,@RequestParam("role") String role)
+	    {
+	    	System.out.println("Inside image upload");
+	    	System.out.println("file:"+file);
+	    	System.out.println("Name:"+username+"/t"+password+"/t"+firstname);
+	    	int x=Integer.parseInt(contact);
+	    	User user=new User();
+	    	user.setEmail(email);
+	    	user.setFirstname(firstname);
+	    	user.setLastname(lastname);
+	    	user.setContact(x);
+	    	user.setPassword(password);
+	    	user.setRole(role);
+	    	user.setUser_name(username);
+	    	user.setIsOnline('n');
+	    	userDao.saveuser(user);
+	    	
+	    	Path path=Paths.get("C:\\Users\\MD.AMEERPASHA\\git2\\collabarationfrontend\\WebContent\\img\\" +user.getUser_name() + ".jpg");
+	    	if(file!=null)
+	    	{
+	    		try {
+	    			file.transferTo(new File(path.toString()));
+	    		}catch(IllegalStateException e) {
+	    			e.printStackTrace();
+	    		}catch(IOException e) {
+	    			e.printStackTrace();
+	    		}
+	    	}
+	    	
+	    	
+	    }
 }
 
 	    

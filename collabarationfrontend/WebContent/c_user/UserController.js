@@ -6,8 +6,11 @@
 myapp.controller('userController',function(UserService,$scope,$rootScope,$location,$cookieStore){
 	
 	$scope.user={}
-	$scope.registeruser=function(){
-		UserService.registeruser($scope.user).then(
+	$scope.registerUser=function(){
+		
+		var userformdata=UserService.profilePic($scope.user);
+		
+		UserService.registerUser(userformdata).then(
 		function(response){
 			$scope.message="registered successfully..pls. login"
 				$location.path('/login')
@@ -19,9 +22,18 @@ myapp.controller('userController',function(UserService,$scope,$rootScope,$locati
 			$location.path('/register')
 		})
 	}
+	$scope.fetchAllUsers=function(){
+		UserService.fetchAllUsers().then(function(d){
+			$scope.user=d;
+			/*console.log("get all users in user controller.js...")*/
+		},function(errResponse){
+			console.error('Error while fetching users')
+		});
+	};
+	$scope.fetchAllUsers();
 	$scope.isValidUser=function(){
 		UserService.isValidUser($scope.user).then(function(response){
-			console.log(response.data) 
+			/*console.log(response.data) */
 			$rootScope.currentUser=response.data
 			$cookieStore.put("currentUser",response.data)
 			$location.path('/home')
@@ -61,6 +73,22 @@ myapp.controller('userController',function(UserService,$scope,$rootScope,$locati
 		 
 	 }
 })
+myapp.directive('fileModel',['$parse',function ($parse){
+return {
+	restrict:'A',
+	link:function (scope,element,attrs){
+		var model=$parse(attrs.fileModel);
+		var modelSetter=model.assign;
+		
+		element.bind('change',function(){
+			scope.$apply(function(){
+				modelSetter(scope,element[0].files[0]);
+			});
+		});
+	}
+};	
+}]);
+
 		
 	
 		

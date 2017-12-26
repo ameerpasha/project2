@@ -113,13 +113,14 @@ color: #CF7691;
 </div>
 </form>
 </div>
+
 <div class="row">
 <div>
 <div class="panel panel-default">
 <div class="panel-heading">
-<div>{{blog.blogtitle}}</div>
+<div>{{blog.blog_title}}</div>
 <span><strong>created by:</strong>{{blog.user_name.username}}</span>
-<span><strong>on:</strong>{{blog.postedonate:'medium'}}</span>
+<span><strong>on:</strong>{{blog.postedon|date:'medium'}}</span>
 </div>
 <div class="panel-body">{{blog.description}}</div>
 

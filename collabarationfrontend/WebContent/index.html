@@ -42,8 +42,11 @@ type="text/javascript"></script>
                 <li><a href="#" ng-show="currentUser.firstname">Welcome {{currentUser.firstname}} 
 				{{currentUser.lastname}} </a></li>
 				 <li><a href="#/updateprofile" ng-show="currentUser.firstname">UPDATE PROFILE</a></li>
-				  <li><a href="#/job" ng-show="currentUser.firstname">Job</a></li>
+				  <li><a href="#/getalljobs" ng-show="currentUser.firstname">Jobs</a></li>
+				  <li ng-if="currentUser.role=='ADMIN'"><a href="#/job" ng-show="currentUser.firstname">add job</a></li>
 				  <li><a href="#/blog" ng-show="currentUser.firstname">Add BlogPost</a></li>
+				  <li><a href="#/addfriend" ng-show="currentUser.firstname">friends</a></li>
+				  <li><a href="#/chat_forum" ng-show="currentUser.firstname">Chat</a></li>
                 <li><a href="#/register" ng-hide="currentUser.firstname">Sign Up</a></li>
                 <li><a href="#/login" ng-hide="currentUser.firstname">Sign In</a></li>
                 <li><a href="" ng-click="logout()" ng-show="currentUser.firstname">logout</a>
@@ -72,5 +75,15 @@ type="text/javascript"></script>
 <script type="text/javascript" src="c_user/blogService.js"></script>
 <script type="text/javascript" src="c_user/jobController.js"></script>
 <script type="text/javascript" src="c_user/jobservice.js"></script>
+<script type="text/javascript" src="c_user/FriendService.js"></script>
+<script type="text/javascript" src="c_user/RequestService.js"></script>
+<script type="text/javascript" src="c_user/FriendController.js"></script>
+<script type="text/javascript" src="c_user/RequestController.js"></script>
+<script type="text/javascript" src="c_chat_forum/ChatForumController.js"></script>
+<script type="text/javascript" src="c_chat_forum/ChatForumService.js"></script>
+<script type="text/javascript" src="libs/angular/angular.min.js"></script>
+<script type="text/javascript" src="libs/lodash/dist/lodash.min.js"></script>
+<script type="text/javascript" src="libs/sockjs/sockjs.min.js"></script>
+<script type="text/javascript" src="libs/stomp-websocket/lib/stomp.min.js"></script>
 </html>
 
